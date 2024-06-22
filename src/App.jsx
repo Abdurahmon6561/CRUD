@@ -5,6 +5,7 @@ import Layoutt from "./pages/Layout";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -25,6 +26,8 @@ const App = () => {
               </ProtectedRoute>
             }
           >
+            <Route path="register" element={<RegisterPage />} />
+
             <Route path="categories" element={<CategoryPage />} />
             <Route path="product" element={<ProductPage />} />
           </Route>

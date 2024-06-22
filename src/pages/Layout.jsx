@@ -12,6 +12,9 @@ const Layoutt = () => {
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" /><br /><br /><br />
         <Menu theme="dark" mode="inline">
+        <Menu.Item key="1">
+            <NavLink to="/register">Register</NavLink>
+          </Menu.Item>
           <Menu.Item key="2">
             <NavLink to="/categories">Categories</NavLink>
           </Menu.Item>
