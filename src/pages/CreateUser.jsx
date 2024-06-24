@@ -1,32 +1,34 @@
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Register = () => {
+const CreateUser = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://ecommerce-backend-fawn-eight.vercel.app/api/register",
+        "https://ecommerce-backend-fawn-eight.vercel.app/api/users",
         {
-          name: data.name,  // Include name in the data sent to the backend
+          name: data.name,
           email: data.email,
           password: data.password,
+          role: data.role,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       console.log(response.data);
-      if (response.data) {
-        localStorage.setItem("token", response.data.token);
-        navigate("/product");
-      }
+      toast.success("User created successfully");
     } catch (err) {
       toast.error("Error occurred: " + err.message);
       console.log("Error occurred", err);
@@ -37,7 +39,7 @@ const Register = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900">
-          Register
+          Create User
         </h2>
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -127,11 +129,38 @@ const Register = () => {
               <p className="text-red-500 text-xs">{errors.password.message}</p>
             )}
           </div>
+          <div>
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Role
+            </label>
+            <Controller
+              name="role"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Role is required" }}
+              render={({ field }) => (
+                <input
+                  type="text"
+                  id="role"
+                  {...field}
+                  className={`w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    errors.role ? "border-red-500" : ""
+                  }`}
+                />
+              )}
+            />
+            {errors.role && (
+              <p className="text-red-500 text-xs">{errors.role.message}</p>
+            )}
+          </div>
           <button
             type="submit"
             className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Register
+            Create User
           </button>
         </form>
         <ToastContainer />
@@ -140,4 +169,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default CreateUser;

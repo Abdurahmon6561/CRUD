@@ -6,6 +6,8 @@ import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
+import CreateUser from "./pages/CreateUser";
+
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -30,6 +32,7 @@ const App = () => {
 
             <Route path="categories" element={<CategoryPage />} />
             <Route path="product" element={<ProductPage />} />
+            <Route path="/create-user" element={<CreateUser />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

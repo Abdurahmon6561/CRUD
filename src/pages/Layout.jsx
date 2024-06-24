@@ -21,6 +21,9 @@ const Layoutt = () => {
           <Menu.Item key="3">
             <NavLink to="/product">Product</NavLink>
           </Menu.Item>
+          <Menu.Item key="4">
+            <NavLink to="/create-user">Create user</NavLink>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
