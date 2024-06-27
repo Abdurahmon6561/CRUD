@@ -17,7 +17,7 @@ const Register = () => {
       const response = await axios.post(
         "https://ecommerce-backend-fawn-eight.vercel.app/api/register",
         {
-          name: data.name,  // Include name in the data sent to the backend
+          name: data.name,
           email: data.email,
           password: data.password,
         }

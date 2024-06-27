@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreateUser from "./pages/CreateUser";
+import UploadFile from "./pages/UploadFile";
 
 
 const ProtectedRoute = ({ children }) => {
@@ -33,6 +34,8 @@ const App = () => {
             <Route path="categories" element={<CategoryPage />} />
             <Route path="product" element={<ProductPage />} />
             <Route path="/create-user" element={<CreateUser />} />
+            <Route path="/upload" element={<UploadFile />} />
+
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
